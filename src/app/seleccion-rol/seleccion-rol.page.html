@@ -1,0 +1,69 @@
+<ion-content class="ion-padding">
+  <div class="welcome-container">
+    
+    <img src="assets/icon/Tec2.png" class="logo-main" alt="TecNM">
+    
+    <h2>Sistema de Titulación</h2>
+    <p class="subtitle">Selecciona tu rol para ingresar a la plataforma</p>
+
+    <div class="cards-stack">
+      
+      <ion-card class="student-list-item" (click)="navegar('estudiante')">
+        <div class="student-avatar">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Estudiante</h3>
+          <p>Accede a tu proceso de titulación</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegar('coordinador')">
+        <div class="student-avatar">
+          <ion-icon name="people-circle-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Coordinador</h3>
+          <p>Control y asignación de asesores</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegar('asesor')">
+        <div class="student-avatar">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Profesor Asesor</h3>
+          <p>Revisión de proyectos y retroalimentación</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegar('academia')">
+        <div class="student-avatar">
+          <ion-icon name="school-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Academia</h3>
+          <p>Revisión y aprobación de la etapa 2</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegar('servicios_escolares')">
+        <div class="student-avatar">
+          <ion-icon name="business-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Servicios Escolares</h3>
+          <p>Revisión y aprobación de la etapa 4</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+      
+    </div>
+
+  </div>
+</ion-content>

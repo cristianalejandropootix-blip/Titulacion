@@ -1,0 +1,56 @@
+<ion-content class="ion-padding">
+  <div class="premium-container">
+    
+    <div class="header-premium">
+      <img src="assets/icon/Tec2.png" class="logo-top" alt="TecNM">
+    </div>
+
+    <div class="navigation-bar">
+      <ion-button fill="clear" (click)="regresar()" class="btn-back-gold">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h1 class="page-title">Datos Generales</h1>
+    </div>
+
+    <div class="info-list" *ngIf="usuario">
+      
+      <div class="info-item-card">
+        <ion-icon name="person-outline" class="info-icon"></ion-icon>
+        <div class="text-group">
+          <span class="label-gold">Nombre:</span>
+          <p class="data-value">{{ usuario.nombre }} {{ usuario.primer_apellido }} {{ usuario.segundo_apellido }}</p>
+        </div>
+      </div>
+
+      <div class="info-item-card">
+        <ion-icon name="medal-outline" class="info-icon"></ion-icon>
+        <div class="text-group">
+          <span class="label-gold">Matrícula:</span>
+          <p class="data-value">{{ usuario.matricula_o_nomina }}</p>
+        </div>
+      </div>
+
+      <div class="info-item-card">
+        <ion-icon name="book-outline" class="info-icon"></ion-icon>
+        <div class="text-group">
+          <span class="label-gold">Proyecto:</span>
+          <p class="data-value">{{ usuario.nombre_proyecto || 'Sin proyecto asignado' }}</p>
+        </div>
+      </div>
+
+      <div class="info-item-card">
+        <ion-icon name="mail-outline" class="info-icon"></ion-icon>
+        <div class="text-group">
+          <span class="label-gold">Correo:</span>
+          <p class="data-value">{{ usuario.correo }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="!usuario" class="info-list">
+      <p style="text-align:center; color: #888;">Cargando datos...</p>
+    </div>
+
+  </div>
+</ion-content>

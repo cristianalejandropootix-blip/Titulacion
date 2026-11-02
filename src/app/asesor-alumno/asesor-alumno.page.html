@@ -1,0 +1,70 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="regresarAlMenu()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" class="btn-back-gold"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="toolbar-title-gold">Mi Asesor Asignado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="asesor-container">
+
+    <div class="welcome-banner">
+      <h2>Seguimiento de Proyecto</h2>
+      <p>Tu asesor: <strong>{{ nombreAsesor || 'Sin asesor asignado' }}</strong></p>
+    </div>
+    <p *ngIf="errorCargaUsuario" class="empty-state-message">No se pudieron cargar los datos del estudiante o su asesor.</p>
+
+    <p class="section-indicator">Tu Archivo de Proyecto</p>
+
+    <p *ngIf="errorCargaDocumento" class="empty-state-message">No se pudo cargar el archivo del proyecto.</p>
+    <div class="upload-card">
+
+      <div class="file-status-box" *ngIf="nombreArchivo">
+        <ion-icon name="document-text-outline" class="file-icon-active"></ion-icon>
+        <div class="file-info">
+          <h5>{{ nombreArchivo }}</h5>
+          <p>Estatus: <span (click)="verArchivo()" style="cursor:pointer; color: #007bff;">Ver archivo →</span></p>
+        </div>
+      </div>
+
+      <div class="file-status-box empty-state" *ngIf="!nombreArchivo">
+        <ion-icon name="cloud-upload-outline" class="file-icon-empty"></ion-icon>
+        <div class="file-info">
+          <h5>No has subido ningún archivo</h5>
+          <p>Sube tu reporte en formato PDF para que tu asesor lo revise.</p>
+        </div>
+      </div>
+
+      <ion-button expand="block" class="btn-select-file" [disabled]="subiendoDocumento" (click)="seleccionarYSubirArchivo()">
+        <ion-icon slot="start" name="document-attach-outline"></ion-icon>
+        {{ nombreArchivo ? 'Reemplazar Reporte Final' : 'Seleccionar Documento PDF' }}
+      </ion-button>
+      <p class="upload-limit">Tamaño máximo: 2 MB. Solo se aceptan archivos en formato PDF.</p>
+
+    </div>
+
+    <p class="section-indicator">Retroalimentación del Docente</p>
+    <p *ngIf="errorCargaRetroalimentacion" class="empty-state-message">No se pudo cargar la retroalimentación.</p>
+
+    <div class="feedback-received-box" *ngIf="comentarioAsesor">
+      <div class="feedback-title-row">
+        <ion-icon name="chatbubble-ellipses-outline" class="chat-icon"></ion-icon>
+        <h4>OBSERVACIONES DE TU ASESOR:</h4>
+      </div>
+      <p class="feedback-text">"{{ comentarioAsesor }}"</p>
+      <div class="feedback-footer-date">
+        <span>Actualizado recientemente</span>
+      </div>
+    </div>
+
+    <div class="feedback-pending-box" *ngIf="!comentarioAsesor">
+      <ion-icon name="time-outline" class="time-icon"></ion-icon>
+      <p>Tu proyecto aún no cuenta con observaciones. Espera a que tu asesor guarde su retroalimentación.</p>
+    </div>
+
+  </div>
+</ion-content>

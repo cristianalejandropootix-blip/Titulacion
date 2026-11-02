@@ -1,0 +1,17 @@
+<section
+  class="mensaje-card"
+  [class]="'mensaje-card mensaje--' + tipo"
+  role="alertdialog"
+  aria-modal="true"
+  aria-labelledby="mensaje-titulo"
+  aria-describedby="mensaje-contenido">
+  <ion-icon class="mensaje-icono" [name]="nombreIcono" aria-hidden="true"></ion-icon>
+  <h2 id="mensaje-titulo">{{ titulo }}</h2>
+  <p id="mensaje-contenido">{{ mensaje }}</p>
+  <div class="mensaje-acciones">
+    @if (confirmacion) {
+      <ion-button fill="outline" class="btn-cancelar" (click)="cancelar()">{{ textoCancelar }}</ion-button>
+    }
+    <ion-button #acceptButton class="btn-aceptar" (click)="aceptar()">{{ textoAceptar }}</ion-button>
+  </div>
+</section>

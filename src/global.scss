@@ -1,0 +1,293 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+  --mensaje-error-color: #b91c1c;
+  --mensaje-exito-color: #166534;
+  --mensaje-advertencia-color: #854d0e;
+  --mensaje-backdrop-color: #1B396A;
+  --mensaje-shadow-color: rgb(27 57 106 / 18%);
+  --mensaje-contraste-color: #ffff00;
+  --mensaje-card-background: #ffffff;
+  --mensaje-title-color: #1B396A;
+  --mensaje-text-color: #334155;
+}
+
+.empty-state-message {
+  padding: 12px 14px;
+  border: 1px solid var(--ion-color-primary);
+  border-radius: 12px;
+  background: var(--ion-background-color, #ffffff);
+  color: var(--ion-color-primary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.field-invalid,
+.input-wrapper-gold.field-invalid,
+.input-card.field-invalid,
+.career-input.field-invalid {
+  border-color: var(--form-error-color) !important;
+  box-shadow: 0 0 0 1px var(--form-error-color);
+}
+
+.field-error {
+  width: 100%;
+  margin: -8px 0 0;
+  color: var(--form-error-color);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+:root {
+  --form-error-color: var(--mensaje-error-color);
+}
+
+.mensaje-app-modal {
+  --width: min(92vw, 420px);
+  --height: auto;
+  --background: transparent;
+  --box-shadow: none;
+  --border-radius: 16px;
+  --backdrop-opacity: 0.28;
+}
+
+.mensaje-app-modal::part(backdrop) {
+  background: var(--mensaje-backdrop-color);
+  opacity: 0.28;
+}
+
+:root {
+  --estado-revision-bg: #fef3c7;
+  --estado-revision-text: #713f12;
+  --estado-aprobada-bg: #dcfce7;
+  --estado-aprobada-text: #166534;
+  --estado-rechazada-bg: #fee2e2;
+  --estado-rechazada-text: #991b1b;
+  --estado-pendiente-bg: #e2e8f0;
+  --estado-pendiente-text: #334155;
+}
+
+:root {
+  --select-app-background: #ffffff;
+  --select-app-text: #000000;
+  --select-app-radius: 12px;
+}
+
+ion-popover.select-app {
+  --width: min(360px, calc(100vw - 32px));
+  --min-width: min(280px, calc(100vw - 32px));
+  --max-width: calc(100vw - 32px);
+  --background: var(--select-app-background);
+  --color: var(--select-app-text);
+  --box-shadow: 0 8px 24px var(--mensaje-shadow-color);
+  --border-radius: var(--select-app-radius);
+
+  width: min(360px, calc(100vw - 32px));
+  min-width: min(280px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  color-scheme: light;
+}
+
+ion-popover.select-app::part(content) {
+  border-radius: var(--select-app-radius);
+  background: var(--select-app-background);
+}
+
+ion-popover.select-app ion-select-popover {
+  --background: var(--select-app-background);
+  --color: var(--select-app-text);
+  font-size: 1rem;
+}
+
+ion-popover.select-app ion-select-popover ion-item {
+  --background: var(--select-app-background);
+  --background-hover: color-mix(in srgb, var(--ion-color-primary) 10%, var(--select-app-background));
+  --background-focused: color-mix(in srgb, var(--ion-color-primary) 14%, var(--select-app-background));
+  --color: var(--select-app-text);
+  --min-height: 48px;
+  --inner-padding-start: 16px;
+  --inner-padding-end: 16px;
+  --border-color: color-mix(in srgb, var(--ion-text-color) 12%, transparent);
+  height: auto;
+  white-space: normal;
+}
+
+ion-popover.select-app ion-select-popover ion-radio {
+  --color: var(--select-app-text);
+  --color-checked: var(--ion-color-primary);
+  width: 100%;
+  white-space: normal;
+}
+
+ion-popover.select-app ion-select-popover ion-radio::part(label) {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+ion-popover.select-app ion-select-popover ion-item.item-radio-checked {
+  --background: color-mix(in srgb, var(--ion-color-primary) 12%, var(--select-app-background));
+  --color: var(--ion-color-primary);
+  font-weight: 600;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.estado-badge.estado--revision {
+  --background: var(--estado-revision-bg);
+  --color: var(--estado-revision-text);
+  background: var(--estado-revision-bg);
+  color: var(--estado-revision-text);
+}
+
+.estado-badge.estado--aprobada {
+  --background: var(--estado-aprobada-bg);
+  --color: var(--estado-aprobada-text);
+  background: var(--estado-aprobada-bg);
+  color: var(--estado-aprobada-text);
+}
+
+.estado-badge.estado--rechazada {
+  --background: var(--estado-rechazada-bg);
+  --color: var(--estado-rechazada-text);
+  background: var(--estado-rechazada-bg);
+  color: var(--estado-rechazada-text);
+}
+
+.estado-badge.estado--pendiente {
+  --background: var(--estado-pendiente-bg);
+  --color: var(--estado-pendiente-text);
+  background: var(--estado-pendiente-bg);
+  color: var(--estado-pendiente-text);
+}
+
+.alto-contraste {
+  --ion-background-color: #000000;
+  --ion-text-color: #ffffff;
+  --ion-color-primary: #ffff00;
+  --ion-card-background: #1a1a1a;
+  --estado-revision-bg: #000000;
+  --estado-revision-text: #ffff00;
+  --estado-aprobada-bg: #000000;
+  --estado-aprobada-text: #ffffff;
+  --estado-rechazada-bg: #000000;
+  --estado-rechazada-text: #ffffff;
+  --estado-pendiente-bg: #000000;
+  --estado-pendiente-text: #ffffff;
+  --mensaje-card-background: #000000;
+  --mensaje-title-color: #ffffff;
+  --mensaje-text-color: #ffffff;
+  --form-error-color: var(--mensaje-contraste-color);
+  --select-app-background: #000000;
+  --select-app-text: #ffffff;
+  
+  ion-card, .config-item-card, .profesor-card {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4, p, span {
+    color: #ffffff !important;
+  }
+
+  .field-error {
+    color: var(--mensaje-contraste-color) !important;
+  }
+
+  .welcome-banner, .main-panel-container {
+    background: #000000;
+  }
+
+  .estado-badge {
+    border: 2px solid var(--mensaje-contraste-color);
+  }
+
+  ion-popover.select-app {
+    --background: var(--ion-background-color);
+    --color: var(--ion-text-color);
+    color-scheme: dark;
+  }
+
+  ion-popover.select-app::part(content),
+  ion-popover.select-app ion-select-popover,
+  ion-popover.select-app ion-select-popover ion-item {
+    --background: var(--ion-background-color);
+    --color: var(--ion-text-color);
+    background: var(--ion-background-color);
+    color: var(--ion-text-color);
+  }
+
+  ion-popover.select-app ion-select-popover ion-radio {
+    --color: var(--ion-text-color);
+    --color-checked: var(--ion-color-primary);
+  }
+
+  ion-popover.select-app ion-select-popover ion-radio::part(label) {
+    color: var(--ion-text-color);
+  }
+
+  ion-popover.select-app ion-select-popover ion-item.item-radio-checked {
+    --background: color-mix(in srgb, var(--ion-color-primary) 24%, var(--select-app-background));
+    --color: var(--ion-text-color);
+  }
+
+  .accordion-header.estado--revision,
+  .accordion-header.estado--aprobada,
+  .accordion-header.estado--rechazada,
+  .accordion-header.estado--pendiente {
+    background: #000000 !important;
+    border-inline-start: 4px solid var(--mensaje-contraste-color);
+  }
+
+  .estado-mensaje,
+  .pdf-format-note,
+  .upload-limit {
+    color: var(--mensaje-contraste-color) !important;
+  }
+}

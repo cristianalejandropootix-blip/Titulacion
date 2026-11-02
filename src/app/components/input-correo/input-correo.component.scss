@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  flex: 1;
+  min-width: 0;
+}
+
+.email-input-stack {
+  position: relative;
+  min-width: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.email-input-control {
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--ion-color-primary) 28%, var(--mensaje-card-background));
+  border-radius: 12px;
+  background: var(--mensaje-card-background);
+}
+
+.email-input-control.field-invalid {
+  border-color: var(--mensaje-error-color);
+}
+
+.email-input-control ion-icon {
+  flex: 0 0 auto;
+  color: var(--ion-color-primary);
+  font-size: 20px;
+}
+
+.email-input-control ion-input {
+  min-width: 0;
+  --color: var(--mensaje-text-color);
+  --placeholder-color: var(--mensaje-text-color);
+  --placeholder-opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+.email-ghost-suggestion {
+  position: absolute;
+  top: 50%;
+  left: 42px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+  font: inherit;
+  font-size: 0.95rem;
+  color: transparent;
+}
+
+.email-ghost-suggestion button {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--mensaje-text-color) 55%, var(--mensaje-card-background));
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: left;
+  white-space: pre;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+:host-context(.alto-contraste) .email-input-control {
+  border-color: var(--ion-color-primary);
+}
+
+:host-context(.alto-contraste) .email-input-control ion-input {
+  --color: var(--ion-text-color);
+  --placeholder-color: var(--ion-text-color);
+}
+
+:host-context(.alto-contraste) .email-ghost-suggestion button {
+  color: var(--ion-color-primary);
+}

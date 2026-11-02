@@ -1,0 +1,173 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="regresarAlInicio()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" class="btn-back-gold"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="toolbar-title-gold">Etapas de Titulación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="fases-container">
+
+    <div class="welcome-banner">
+      <h2>Tu Progreso</h2>
+      <p>Completa los requisitos de cada etapa para avanzar</p>
+      <p class="pdf-format-note">Solo se aceptan archivos en formato PDF.</p>
+    </div>
+
+    <p *ngIf="errorCargaFases" class="empty-state-message">No se pudieron cargar las etapas. Intenta volver a entrar más tarde.</p>
+    <p *ngIf="errorCargaDocumentos" class="empty-state-message">No se pudieron cargar los documentos de la etapa.</p>
+
+    <div class="accordion-stack">
+      <div *ngFor="let fase of listaFases" class="accordion-item" [ngClass]="{'fase-locked': fase.bloqueada}">
+        
+        <div class="accordion-header" [ngClass]="getClaseEstado(fase.estado)" (click)="toggleFase(fase)">
+          <div class="fase-title-block">
+            <ion-icon [name]="fase.bloqueada ? 'lock-closed-outline' : 'folder-open-outline'" class="fase-icon"></ion-icon>
+            <div>
+              <h3>{{ fase.nombre }}</h3>
+              <p *ngIf="fase.bloqueada" class="txt-lock">Bloqueado — Completa la etapa anterior</p>
+              <p *ngIf="!fase.bloqueada" class="txt-unlock">Estatus: <strong>{{ getEtiquetaEstado(fase.estado) }}</strong></p>
+              <p *ngIf="!fase.bloqueada && fase.estado === 'En Revisión'" class="estado-mensaje">
+                Tus documentos están en revisión. Te avisaremos cuando el coordinador responda.
+              </p>
+            </div>
+          </div>
+          
+          <div class="header-end-side" *ngIf="!fase.bloqueada">
+            <span class="estado-badge" [ngClass]="getClaseEstado(fase.estado)">{{ getEtiquetaEstado(fase.estado) }}</span>
+            <ion-icon [name]="faseAbierta === fase.id ? 'chevron-up-outline' : 'chevron-down-outline'" class="arrow-toggle"></ion-icon>
+          </div>
+        </div>
+
+        <div class="accordion-content" *ngIf="faseAbierta === fase.id && !fase.bloqueada">
+          
+          <!-- Comentario del coordinador si fue rechazado -->
+          <section *ngIf="fase.id === 'paso2' || fase.id === 'paso4'" class="review-stage-info">
+            <div class="review-stage-info-heading">
+              <ion-icon [name]="fase.id === 'paso2' ? 'school-outline' : 'business-outline'" aria-hidden="true"></ion-icon>
+              <div>
+                <h4>{{ fase.id === 'paso2' ? 'Revisión de Academia' : 'Revisión de Servicios Escolares' }}</h4>
+                <ion-badge class="estado-badge" [ngClass]="getClaseEstado(fase.estado)">
+                  {{ getEtiquetaEstado(fase.estado) }}
+                </ion-badge>
+              </div>
+            </div>
+            <p *ngIf="fase.estado !== 'Aprobado' && fase.estado !== 'Rechazado'">
+              {{ fase.id === 'paso2' ? 'En espera de la aprobación de Academia.' : 'En espera de la aprobación de Servicios Escolares.' }}
+            </p>
+            <p *ngIf="fase.estado === 'Aprobado'" class="review-stage-outcome">Aprobada</p>
+            <p *ngIf="fase.estado === 'Rechazado'" class="review-stage-outcome">No aprobada</p>
+            <p *ngIf="fase.comentario" class="review-stage-comment">{{ fase.comentario }}</p>
+          </section>
+
+          <ng-container *ngIf="fase.id !== 'paso2' && fase.id !== 'paso4'">
+          <div *ngIf="fase.estado === 'Rechazado' && fase.comentario" class="feedback-alert-box">
+            <div class="feedback-title">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <h4>Notas de Coordinación:</h4>
+            </div>
+            <p class="feedback-message">"{{ fase.comentario }}"</p>
+          </div>
+
+          <section *ngIf="fase.id === 'paso3'" class="protocol-date-card" aria-live="polite">
+            <div class="protocol-date-card-heading">
+              <ion-icon name="calendar-outline" aria-hidden="true"></ion-icon>
+              <h4>Asignación de fecha de acto protocolario</h4>
+            </div>
+              <p *ngIf="tipoFechaProtocolaria === 'sin-fecha'">Aún no tienes fecha asignada.</p>
+            <ng-container *ngIf="tipoFechaProtocolaria === 'futura'">
+              <p class="protocol-date-value">{{ formatearFechaAsignada(fechaProtocolariaVigente!) }}</p>
+              <p>Podrás enviar tu documento únicamente ese día, de las 12:01 a.m. a las 11:59 p.m.</p>
+            </ng-container>
+            <p *ngIf="tipoFechaProtocolaria === 'hoy'">
+              Hoy es tu día de entrega. Puedes enviar tu documento hasta las 11:59 p.m.
+            </p>
+            <p *ngIf="tipoFechaProtocolaria === 'pasada'">
+              Tu fecha asignada ya pasó. Comunícate con coordinación para que te asignen una nueva.
+            </p>
+          </section>
+
+          <p class="section-indicator">Archivos y Requisitos:</p>
+
+          <div class="docs-inside-list">
+            <div *ngFor="let doc of fase.documentos" class="doc-row-item">
+              <div class="doc-meta">
+                <ion-icon 
+                  [name]="doc.urlArchivo ? 'checkmark-circle-outline' : 'document-outline'" 
+                  [ngClass]="{'icon-active': doc.urlArchivo, 'icon-empty': !doc.urlArchivo}">
+                </ion-icon>
+                <div class="doc-text">
+                  <h5>{{ doc.nombreDoc }}</h5>
+                  <ion-badge
+                    *ngIf="doc.estado"
+                    class="estado-badge document-state-badge"
+                    [ngClass]="getClaseEstado(doc.estado)">
+                    {{ doc.estado }}
+                  </ion-badge>
+                  <span *ngIf="doc.urlArchivo" class="file-link" (click)="verArchivo(doc.urlArchivo)">
+                    ✅ Ver archivo subido
+                  </span>
+                  <span *ngIf="!doc.urlArchivo" class="file-empty">Sin archivo cargado</span>
+                </div>
+              </div>
+              
+              <!-- Input oculto para seleccionar archivo -->
+              <input 
+                type="file" 
+                accept="application/pdf"
+                [id]="'file-' + doc.id"
+                style="display:none"
+                (cancel)="archivoCancelado()"
+                (change)="seleccionarArchivo($event, fase, doc)">
+
+              <div class="upload-actions">
+                <span class="upload-limit">Tamaño máximo: 2 MB</span>
+                <ion-button 
+                  fill="clear" 
+                  class="btn-action-upload" 
+                  [disabled]="fase.estado === 'Aprobado' || subiendoDocumento || (fase.id === 'paso3' && !doc.urlArchivo && !puedeCargarPaso3)"
+                  [class.protocol-date-control-blocked]="fase.id === 'paso3' && !doc.urlArchivo && !puedeCargarPaso3"
+                  (click)="doc.urlArchivo ? verArchivo(doc.urlArchivo) : triggerFileInput(doc.id, fase)">
+                  <ion-icon slot="icon-only" [name]="fase.id === 'paso3' && !doc.urlArchivo && !puedeCargarPaso3 ? 'lock-closed-outline' : doc.urlArchivo ? 'document-text-outline' : 'cloud-upload-outline'"></ion-icon>
+                </ion-button>
+                <ion-button
+                  *ngIf="doc.urlArchivo && fase.estado !== 'Aprobado'"
+                  fill="clear"
+                  size="small"
+                  class="protocol-date-replace"
+                  [disabled]="subiendoDocumento || (fase.id === 'paso3' && !puedeCargarPaso3)"
+                  [class.protocol-date-control-blocked]="fase.id === 'paso3' && !puedeCargarPaso3"
+                  (click)="triggerFileInput(doc.id, fase)">
+                  Reemplazar
+                </ion-button>
+              </div>
+            </div>
+          </div>
+
+          <p *ngIf="fase.id === 'paso3' && !puedeCargarPaso3" class="protocol-date-locked-note">
+            <ion-icon name="lock-closed-outline" aria-hidden="true"></ion-icon>
+            Disponible únicamente el día de tu fecha asignada.
+          </p>
+
+          <ion-button 
+            expand="block" 
+            class="btn-send-phase" 
+            [class.protocol-date-blocked]="fase.id === 'paso3' && !puedeCargarPaso3"
+            [disabled]="fase.estado === 'Aprobado' || fase.estado === 'En Revisión' || enviandoRevision || (fase.id === 'paso3' && !puedeCargarPaso3)"
+            (click)="enviarARevision(fase)">
+            <ion-icon *ngIf="fase.id === 'paso3' && !puedeCargarPaso3" slot="start" name="lock-closed-outline"></ion-icon>
+            {{ fase.estado === 'En Revisión' ? 'Enviado a Revisión' : 'Enviar Etapa a Revisión' }}
+          </ion-button>
+          </ng-container>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</ion-content>

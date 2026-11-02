@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+.custom-input {
+  --background: #fff;
+  border: 1px solid #1B396A;
+  border-radius: 30px; /* Esto hace que se vea ovalado como tu imagen */
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 300px;
+  
+  ion-icon {
+    color: #1B396A;
+    margin-left: 10px;
+  }
+}
+
+.btn-ingresar {
+  --background: #1B396A;
+  --border-radius: 12px;
+  width: 140px;
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: none;
+}
+
+.footer {
+  margin-top: 30px;
+  color: #000;
+  .link {
+    color: #1B396A;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}

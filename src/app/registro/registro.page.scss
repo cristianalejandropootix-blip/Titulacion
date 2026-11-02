@@ -1,0 +1,114 @@
+/* --- BLINDAJE CONTRA MODO OSCURO --- */
+ion-header, ion-toolbar, ion-content {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.toolbar-title-blue { 
+  color: #1B396A !important; 
+  font-weight: 700; 
+  font-size: 1.1rem; 
+  text-align: center;
+}
+
+.register-container {
+  max-width: 340px;
+  margin: 0 auto;
+  padding-top: 15px;
+}
+
+.register-header-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+
+  .logo-register { width: 120px; height: auto; margin-bottom: 10px; }
+  h2 { color: #1B396A !important; font-size: 1.4rem; font-weight: 700; margin: 0; }
+  p { color: #64748b !important; font-size: 0.85rem; margin: 4px 0 0 0; }
+}
+
+/* --- FORMULARIO CON RECUADROS DORADOS FINOS DE 1PX --- */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-wrapper-gold {
+  display: flex;
+  align-items: center;
+  background: #ffffff !important;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important; /* Borde dorado premium sutil */
+  border-radius: 12px;
+  padding: 0 12px;
+  height: 46px;
+
+  .input-icon { font-size: 18px; color: #C5A87A !important; margin-right: 10px; }
+  .custom-input { --color: #000000 !important; color: #000000 !important; font-size: 0.9rem; }
+}
+
+.career-input {
+  --background: #ffffff;
+  --border-color: transparent;
+  --padding-start: 12px;
+  height: auto;
+  min-height: 46px;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important;
+  ion-icon { color: #C5A87A !important; margin-right: 10px; }
+  ion-select {
+    flex: 1;
+    min-height: 46px;
+    color: #000000;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+
+    &::part(text),
+    &::part(placeholder) {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+  }
+}
+
+/* Botón de Enviar */
+.btn-register-submit {
+  --background: #1B396A !important; /* Azul marino */
+  --color: #ffffff !important;
+  --border-radius: 12px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Footer Links */
+.register-footer {
+  text-align: center;
+  margin-top: 20px;
+  p { color: #64748b !important; font-size: 0.85rem; }
+  a { color: #C5A87A !important; font-weight: 700; text-decoration: none; }
+}
+
+/* Botón inferior Volver */
+.back-roles-footer {
+  text-align: center;
+  margin-top: 15px;
+  border-top: 1px dashed rgba(100, 116, 139, 0.15);
+  padding-top: 10px;
+}
+
+.btn-back-link {
+  --color: #64748b !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: none;
+  margin: 0 auto;
+  
+  ion-icon {
+    color: #C5A87A !important;
+    font-size: 16px;
+  }
+}

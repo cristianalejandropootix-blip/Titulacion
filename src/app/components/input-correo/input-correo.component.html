@@ -1,0 +1,36 @@
+<div class="email-input-stack">
+  <div class="email-input-control" [class.field-invalid]="invalid">
+    <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+    <ion-input
+      #emailInput
+      [type]="autocompletarDominio ? 'text' : 'email'"
+      inputmode="email"
+      autocomplete="username"
+      [attr.aria-label]="ariaLabel"
+      [attr.aria-describedby]="describedBy"
+      [attr.aria-autocomplete]="'list'"
+      [attr.aria-controls]="suggestionId"
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="disabled"
+      (ionInput)="onInput($event)"
+      (ionFocus)="onFocus()"
+      (ionBlur)="onBlur()"
+      (pointerup)="onPointerUp($event)"
+      (keydown)="onKeydown($event)">
+    </ion-input>
+    <div
+      *ngIf="focused && suggestion"
+      class="email-ghost-suggestion"
+      [id]="suggestionId"
+      role="status"
+      aria-live="polite">
+      <span aria-hidden="true">{{ value }}</span><button
+        type="button"
+        tabindex="-1"
+        [attr.aria-label]="'Completar con ' + suggestion"
+        (pointerdown)="holdInputFocus($event)"
+        (click)="selectSuggestion()">{{ suggestion.slice(value.length) }}</button>
+    </div>
+  </div>
+</div>

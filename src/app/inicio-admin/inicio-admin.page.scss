@@ -1,0 +1,343 @@
+/* --- BLINDAJE ABSOLUTO CONTRA MODO OSCURO --- */
+ion-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(27, 57, 106, 0.1);
+}
+
+ion-toolbar {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  --padding-start: 15px;
+  --padding-end: 15px;
+}
+
+ion-content {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* Cabecera Administrativa */
+.header-admin-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: #ffffff !important;
+
+  .logo-admin-top {
+    width: 130px;
+    height: auto;
+  }
+
+  .btn-logout {
+    --color: #C5A87A !important; /* Dorado Institucional */
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+/* Contenedor de Contenido */
+.main-panel-container {
+  max-width: 360px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.welcome-banner {
+  margin-bottom: 25px;
+  h2 { color: #1B396A !important; font-size: 1.5rem; font-weight: 700; margin: 0; }
+  p { color: #94a3b8 !important; font-size: 0.88rem; margin: 4px 0 0 0; }
+}
+
+.search-panel {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 18px;
+}
+
+.egresados-searchbar {
+  --background: #ffffff;
+  --color: #1B396A;
+  --placeholder-color: #64748b;
+  --icon-color: #C5A87A;
+  --clear-button-color: #C5A87A;
+  --border-radius: 16px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(197, 168, 122, 0.4);
+  border-radius: 16px;
+  background: #ffffff;
+  color-scheme: light;
+
+  &:focus-within {
+    border-color: rgba(197, 168, 122, 0.8);
+    box-shadow: 0 0 0 1px rgba(197, 168, 122, 0.4);
+  }
+}
+
+.career-group { margin-bottom: 22px; }
+.career-group-title {
+  color: #1B396A;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 18px 0 10px 2px;
+}
+
+.search-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  margin: 10px 0;
+  padding: 24px 16px;
+  border: 1px solid rgba(197, 168, 122, 0.4);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  color-scheme: light;
+  text-align: center;
+
+  ion-icon {
+    color: #C5A87A;
+    font-size: 32px;
+    opacity: 0.7;
+  }
+
+  p {
+    max-width: 100%;
+    margin: 0;
+    color: #1B396A;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* --- LISTA DE ALUMNOS EN PANEL CENTRAL --- */
+.student-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-list-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+  cursor: pointer;
+
+  &:active { background: #f8fafc !important; }
+}
+
+.student-avatar {
+  font-size: 36px;
+  color: #C5A87A !important;
+  display: flex;
+  align-items: center;
+}
+
+.student-brief {
+  flex: 1;
+  h3 { color: #1B396A !important; font-size: 1.1rem; font-weight: 600; margin: 0; }
+  p { color: #64748b !important; font-size: 0.85rem; margin: 2px 0 0 0; }
+}
+
+.fases-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+
+.badge-fase {
+  display: inline-block;
+  background: rgba(197, 168, 122, 0.1) !important;
+  color: #C5A87A !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+  border: 1px solid rgba(197, 168, 122, 0.2);
+}
+
+.arrow-list { font-size: 18px; color: #C5A87A !important; opacity: 0.6; }
+
+/* --- MODAL DE REVISIÓN CON FLUJO INTELIGENTE DE ARCHIVOS --- */
+.modal-toolbar {
+  --background: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  ion-title { color: #1B396A !important; font-weight: 700; font-size: 1.1rem; }
+}
+
+.modal-bg { --background: #ffffff !important; }
+
+.modal-student-header {
+  h2 { color: #1B396A !important; font-size: 1.3rem; font-weight: 700; margin: 0; }
+  p { color: #475569 !important; font-size: 0.88rem; margin: 4px 0 0 0; strong { color: #000000 !important; } }
+}
+
+:host ::ng-deep ion-popover.select-app { --background: #ffffff !important; --color: var(--ion-color-primary) !important; --ion-text-color: var(--ion-color-primary); color-scheme: light; }
+:host ::ng-deep ion-popover.select-app ion-select-popover ion-item { --background: #ffffff !important; --color: var(--ion-color-primary) !important; }
+
+.protocol-date-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 12px;
+}
+.protocol-date-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.protocol-date-picker {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  color: #1B396A;
+  color-scheme: light;
+}
+
+.protocol-date-picker::part(calendar-day) { color: #1B396A; }
+.protocol-date-picker::part(calendar-day active) { color: #ffffff; background: #1B396A; }
+.protocol-date-picker::part(calendar-day today) { border: 1px solid #C5A87A; }
+.protocol-date-picker::part(calendar-day disabled) { color: #94a3b8; opacity: 1; }
+.protocol-date-picker::part(month-year-button),
+.protocol-date-picker::part(navigation-button) { color: #1B396A; }
+.protocol-date-picker::part(calendar-days-of-week) { color: #1B396A !important; }
+
+.protocol-date-footer {
+  --background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  color-scheme: light;
+}
+
+.protocol-date-footer ion-toolbar {
+  --background: #ffffff;
+  --min-height: 72px;
+  padding: 8px 12px;
+}
+
+.protocol-date-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.protocol-date-actions ion-button {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  --border-radius: 10px;
+}
+
+.protocol-date-actions .btn-modal-action {
+  --background: #1B396A;
+  --color: #ffffff;
+}
+
+@media (max-width: 360px) {
+  .protocol-date-picker::part(calendar-day) {
+    width: max(30px, calc((100vw - 40px) / 7));
+    min-width: 0;
+    height: max(30px, calc((100vw - 40px) / 7));
+  }
+
+  .protocol-date-actions ion-button {
+    font-size: 0.82rem;
+    --padding-start: 6px;
+    --padding-end: 6px;
+  }
+}
+.divider { border: 0; height: 1px; background: #e2e8f0; margin: 18px 0; }
+.modal-section-title { color: #1B396A !important; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-top: 18px; margin-bottom: 12px; }
+.review-unavailable {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Contenedor de la lista de documentos cargados/pendientes */
+.modal-docs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Textos Generales del Documento */
+.doc-title-main {
+  margin: 0 !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: #1B396A !important;
+}
+
+.file-name-sub {
+  margin: 2px 0 !important;
+  font-size: 0.8rem !important;
+  color: #64748b !important;
+}
+
+.text-muted { color: #94a3b8 !important; }
+
+/* Caja de Estado A: ENTREGADO (Borde dorado fino) */
+.pdf-box {
+  background: #f8fafc !important;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important;
+  display: flex !important; align-items: center; gap: 12px; padding: 12px; border-radius: 10px;
+
+  ion-icon.pdf-icon { color: #b91c1c !important; font-size: 32px !important; display: block !important; }
+  .pdf-info {
+    flex: 1;
+    a { color: #1B396A !important; font-weight: 700; font-size: 0.82rem; }
+  }
+}
+
+/* Caja de Estado B: PENDIENTE (Borde discontinuo gris) */
+.pending-box {
+  background: #f8fafc !important;
+  border: 1px dashed #cbd5e1 !important;
+  display: flex !important; align-items: center; gap: 12px; padding: 12px; border-radius: 10px;
+
+  .pending-icon { font-size: 32px !important; color: #94a3b8 !important; }
+  .pdf-info { flex: 1; }
+}
+
+/* Etiqueta Pendiente */
+.badge-pending {
+  display: inline-block;
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  margin-top: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Retroalimentación */
+.comment-wrapper {
+  border: 1px solid rgba(27, 57, 106, 0.2) !important;
+  border-radius: 12px; background: #ffffff !important; padding: 6px; margin-bottom: 25px;
+}
+
+.custom-textarea { --color: #000000 !important; color: #000000 !important; }
+
+.modal-actions-group {
+  display: flex; flex-direction: column; gap: 12px;
+  .btn-modal-action { height: 46px; font-weight: 600; --border-radius: 10px; margin: 0; }
+}

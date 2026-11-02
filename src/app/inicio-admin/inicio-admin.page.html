@@ -1,0 +1,266 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <div class="header-admin-box">
+      <img src="assets/icon/Tec2.png" class="logo-admin-top" alt="TecNM">
+      <ion-button fill="clear" class="btn-logout" (click)="cerrarSesionAdmin()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="main-panel-container">
+
+    <div class="welcome-banner">
+      <h2>{{ tituloPanel }}</h2>
+      <p>Gestión y Seguimiento de Procesos de Titulación</p>
+    </div>
+
+    <!-- SECCIÓN: LISTA DE EGRESADOS -->
+    <div class="tab-content">
+      <div class="search-panel">
+        <ion-searchbar
+          class="egresados-searchbar"
+          aria-label="Buscar egresados"
+          placeholder="Buscar por nombre, apellidos, número de control o carrera"
+          [(ngModel)]="busquedaTexto"
+          (ionInput)="buscarEgresados($event)"
+          show-clear-button="always">
+        </ion-searchbar>
+      </div>
+
+      <div
+        *ngIf="listaAlumnos.length === 0 && !busquedaTexto.trim()"
+        class="search-empty-state"
+        role="status"
+        aria-live="polite">
+        <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+        <p>Aún no hay egresados registrados.</p>
+      </div>
+
+      <div *ngFor="let grupo of getAlumnosPorCarrera()" class="career-group">
+        <h3 class="career-group-title">{{ grupo.carrera }} ({{ grupo.alumnos.length }})</h3>
+        <div class="student-list-container">
+          <div *ngFor="let estudiante of grupo.alumnos" class="student-list-item" (click)="abrirRevision(estudiante)">
+            <div class="student-avatar">
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </div>
+            <div class="student-brief">
+              <h3>{{ estudiante.nombre }} {{ estudiante.primer_apellido }}</h3>
+              <p>{{ estudiante.matricula_o_nomina }}</p>
+              <div class="fases-badges">
+                <ion-badge *ngFor="let fase of estudiante.fases" class="estado-badge" [ngClass]="getClaseEstado(fase.estado)">
+                  {{ fase.paso }}: {{ getResumenEstado(fase.estado) }}
+                </ion-badge>
+                <span *ngIf="!estudiante.fases || estudiante.fases.length === 0" class="badge-sin-fases">Sin fases enviadas</span>
+              </div>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="busquedaTexto.trim() && listaAlumnosFiltrados.length === 0"
+        class="search-empty-state"
+        role="status"
+        aria-live="polite">
+        <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+        <p>No se encontraron egresados con ese criterio.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL DE REVISIÓN -->
+  <ion-modal #revisionModal [isOpen]="isModalOpen" (didDismiss)="revisionDismissed()" class="premium-admin-modal">
+    <ng-template>
+      <ion-header lines="none">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title>Revisión de Egresado</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarRevision()" color="medium">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding modal-bg">
+        <div *ngIf="alumnoSeleccionado" class="modal-body">
+
+          <div class="review-summary" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px">
+            <div class="modal-student-header">
+              <h2>{{ alumnoSeleccionado.nombre }} {{ alumnoSeleccionado.primer_apellido }}</h2>
+              <p>Matrícula: <strong>{{ alumnoSeleccionado.matricula_o_nomina }}</strong></p>
+              <p>Correo: {{ alumnoSeleccionado.correo }}</p>
+              <p>Proyecto: {{ alumnoSeleccionado.nombre_proyecto || 'Sin proyecto' }}</p>
+            </div>
+            <div class="review-status-actions" style="display:flex;flex:1 1 190px;flex-direction:column;gap:12px">
+              <div class="fase-estado-box" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;color:#64748b;font-size:.85rem">
+                <span>Estado actual: </span>
+                <ion-badge class="estado-badge" [ngClass]="getClaseEstado(getFaseEstado(alumnoSeleccionado, pasoSeleccionado))">
+                  {{ getEtiquetaEstado(getFaseEstado(alumnoSeleccionado, pasoSeleccionado)) }}
+                </ion-badge>
+              </div>
+              <ion-button
+                *ngIf="esCoordinador"
+                fill="outline"
+                class="btn-authorize-cancellation"
+                style="--color:#1B396A;--border-color:rgba(197,168,122,.8);--border-radius:10px;--background:#fff;width:100%;margin:0;font-weight:600"
+                [disabled]="cancelacionEnCurso || procesandoAccion"
+                (click)="autorizarCancelacion()">
+                Autorizar cancelación
+              </ion-button>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Selector de paso a revisar -->
+          <p class="modal-section-title">Seleccionar Etapa a Revisar:</p>
+          <ion-item
+            lines="none"
+            class="custom-select-item"
+            style="--background:#fff;--color:#1B396A;border:1px solid rgba(197,168,122,.4);border-radius:16px;color-scheme:light">
+            <ion-select
+              #etapaSelect
+              style="--background:#fff;--color:#1B396A;--placeholder-color:#64748b;--icon-color:#C5A87A;color-scheme:light"
+              [(ngModel)]="pasoSeleccionado"
+              interface="popover"
+              [interfaceOptions]="{ cssClass: 'select-app' }"
+              (ionChange)="cargarDocumentosAlumno(alumnoSeleccionado.id)">
+              <ion-select-option *ngIf="esCoordinador" value="paso1">Paso 1: Inicio DEP</ion-select-option>
+              <ion-select-option *ngIf="esCoordinador || rolPanel === 'academia'" value="paso2">Paso 2: Academias</ion-select-option>
+              <ion-select-option *ngIf="esCoordinador" value="paso3">Paso 3: Solicitud Acto Protocolario</ion-select-option>
+              <ion-select-option *ngIf="esCoordinador || rolPanel === 'servicios_escolares'" value="paso4">Paso 4: Autorización Serv. Escolares</ion-select-option>
+              <ion-select-option *ngIf="esCoordinador" value="paso5">Paso 5: Sustentación</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <div *ngIf="esCoordinador && pasoSeleccionado === 'paso3'" class="protocol-date-section" style="margin:12px 0 20px">
+            <p *ngIf="fechaProtocolariaVigente" class="protocol-date-current" style="color:#64748b;font-size:.85rem;margin:0 0 8px">
+              Fecha asignada: {{ formatearFechaProtocolaria(fechaProtocolariaVigente) }}
+            </p>
+            <ion-button
+              expand="block"
+              class="btn-protocol-date"
+              style="--border-radius:10px;--box-shadow:none;margin:0;font-weight:600"
+              [style.--background]="puedeCambiarFechaProtocolaria ? '#1B396A' : '#f8fafc'"
+              [style.--color]="puedeCambiarFechaProtocolaria ? '#ffffff' : '#64748b'"
+              [style.opacity]="puedeCambiarFechaProtocolaria ? '1' : '0.75'"
+              [disabled]="!puedeCambiarFechaProtocolaria || guardandoFechaProtocolaria"
+              (click)="abrirCambioFechaProtocolaria()">
+              <ion-icon
+                slot="start"
+                [name]="puedeCambiarFechaProtocolaria ? 'calendar-outline' : 'lock-closed-outline'">
+              </ion-icon>
+              {{ fechaProtocolariaVigente ? 'Cambiar fecha' : 'Asignar fecha' }}
+            </ion-button>
+            <p *ngIf="!puedeCambiarFechaProtocolaria" class="protocol-date-locked-note" style="color:#64748b;font-size:.78rem;margin:7px 2px 0">
+              Disponible cuando las etapas 1 y 2 estén aprobadas.
+            </p>
+          </div>
+
+          <p *ngIf="!esCoordinador && !revisionDisponible" class="review-unavailable" role="status">
+            Aún no está disponible para revisión.
+          </p>
+
+          <!-- Documentos del paso seleccionado -->
+          <p class="modal-section-title">Documentos subidos:</p>
+          <p *ngIf="errorCargaDocumentos" class="empty-state-message">No se pudieron cargar los documentos de este egresado.</p>
+          <div *ngIf="getDocumentosPaso(pasoSeleccionado).length === 0" style="color:#888; font-size:14px; padding: 8px 0;">
+            El egresado no ha subido documentos en esta etapa.
+          </div>
+          <div class="modal-docs-list">
+            <div *ngFor="let doc of getDocumentosPaso(pasoSeleccionado)" class="pdf-box">
+              <ion-icon name="document-attach-outline" class="pdf-icon"></ion-icon>
+              <div class="pdf-info">
+                <p class="doc-title-main">{{ doc.nombre_doc }}</p>
+                <p class="file-name-sub">{{ doc.nombre_archivo }}</p>
+                <ion-badge
+                  *ngIf="doc.estado"
+                  class="estado-badge"
+                  [ngClass]="getClaseEstado(doc.estado)">
+                  {{ doc.estado }}
+                </ion-badge>
+                <ion-button fill="clear" size="small" (click)="verDocumento(doc.ruta_archivo)">
+                  <ion-icon slot="start" name="eye-outline"></ion-icon>
+                  Ver PDF
+                </ion-button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comentarios -->
+          <p class="modal-section-title">Observaciones / Retroalimentación:</p>
+          <div class="comment-wrapper">
+            <ion-textarea 
+              placeholder="Escribe aquí las observaciones para el egresado..." 
+              rows="4" 
+              [(ngModel)]="comentariosCoordinador"
+              [disabled]="!revisionDisponible || procesandoAccion"
+              class="custom-textarea">
+            </ion-textarea>
+          </div>
+
+          <!-- Acciones -->
+          <div class="modal-actions-group">
+            <ion-button color="success" expand="block" class="btn-modal-action" [disabled]="procesandoAccion || !revisionDisponible" (click)="aprobarFase()">
+              <ion-icon slot="start" name="checkmark-outline"></ion-icon> Aprobar Etapa
+            </ion-button>
+            <ion-button color="danger" fill="outline" expand="block" class="btn-modal-action" [disabled]="procesandoAccion || !revisionDisponible" (click)="rechazarFase()">
+              <ion-icon slot="start" name="close-outline"></ion-icon> Rechazar Etapa
+            </ion-button>
+          </div>
+
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal
+    #fechaModal
+    [isOpen]="isFechaModalOpen"
+    (didDismiss)="isFechaModalOpen = false"
+    class="protocol-date-modal"
+    style="--background:#fff;--color:#1B396A;--width:min(100vw,480px);--height:min(92dvh,760px);--border-radius:16px;color-scheme:light">
+    <ng-template>
+      <ion-header lines="none">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title>Cambio de fecha protocolaria</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding modal-bg protocol-date-content">
+        <div class="protocol-date-form">
+          <ion-datetime
+            class="protocol-date-picker"
+            style="--background:#ffffff;--background-rgb:255,255,255;--title-color:#1B396A;--ion-text-color:#1B396A;--ion-color-base:#1B396A;--ion-color-base-rgb:27,57,106;--ion-color-contrast:#ffffff;--ion-color-contrast-rgb:255,255,255;--ion-color-step-100:#f8fafc;--ion-color-step-150:#e2e8f0;--ion-color-step-200:#e2e8f0;--ion-color-step-400:#94a3b8;--ion-color-step-500:#94a3b8;--ion-color-step-550:#64748b;--ion-color-step-600:#64748b;--ion-color-step-650:#64748b;--wheel-highlight-background:#f8fafc;--wheel-fade-background-rgb:255,255,255;width:100%;color-scheme:light"
+            presentation="date"
+            locale="es-MX"
+            [min]="minFechaProtocolaria"
+            [max]="maxFechaProtocolaria"
+            [yearValues]="aniosFechaProtocolaria"
+            [(ngModel)]="fechaProtocolariaSeleccionada"
+            [disabled]="guardandoFechaProtocolaria">
+          </ion-datetime>
+        </div>
+      </ion-content>
+      <ion-footer class="protocol-date-footer">
+        <ion-toolbar>
+          <div class="protocol-date-actions">
+            <ion-button expand="block" fill="outline" (click)="isFechaModalOpen = false" [disabled]="guardandoFechaProtocolaria">
+              Cancelar
+            </ion-button>
+            <ion-button
+              expand="block"
+              class="btn-modal-action"
+              [disabled]="!puedeGuardarFechaProtocolaria || guardandoFechaProtocolaria"
+              (click)="guardarFechaProtocolaria()">
+              Guardar fecha
+            </ion-button>
+          </div>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

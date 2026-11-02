@@ -1,0 +1,128 @@
+/* --- BLINDAJE CONTRA MODO OSCURO --- */
+ion-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(27, 57, 106, 0.1);
+}
+
+ion-toolbar {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  --padding-start: 15px;
+  --padding-end: 15px;
+}
+
+ion-content {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* Cabecera Estética Limpia */
+.header-admin-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: #ffffff !important;
+
+  .logo-admin-top {
+    width: 130px;
+    height: auto;
+  }
+
+  .btn-logout {
+    --color: #C5A87A !important; /* Dorado institucional */
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+.main-panel-container {
+  max-width: 360px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.welcome-banner {
+  margin-bottom: 25px;
+  h2 { color: #1B396A !important; font-size: 1.5rem; font-weight: 700; margin: 0; }
+  p { color: #94a3b8 !important; font-size: 0.88rem; margin: 4px 0 0 0; }
+}
+
+.cancellation-notice {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 0 18px;
+  padding: 16px;
+  border: 1px solid rgba(197, 168, 122, 0.4);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+
+  p {
+    margin: 0 0 12px;
+    color: #1B396A;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  ion-button {
+    --color: #1B396A;
+    --border-color: rgba(197, 168, 122, 0.7);
+    --border-radius: 10px;
+    margin: 0;
+  }
+}
+
+/* --- TARJETAS DEL STACK --- */
+.cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-list-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important; /* Borde dorado fino */
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+  cursor: pointer;
+  margin: 0;
+
+  &:active { background: #f8fafc !important; }
+}
+
+.student-avatar {
+  font-size: 32px;
+  color: #C5A87A !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Variación de color para el icono de configuración (Gris/Azulado elegante) */
+.icon-settings-gray {
+  color: #64748b !important;
+}
+
+/* Estilo sutil extra para la tarjeta de configuración */
+.btn-settings-card {
+  border: 1px solid rgba(100, 116, 139, 0.25) !important; /* Borde grisáceo limpio */
+  background: #fafafa !important;
+}
+
+.student-brief {
+  flex: 1;
+  h3 { color: #1B396A !important; font-size: 1.05rem; font-weight: 600; margin: 0; }
+  p { color: #64748b !important; font-size: 0.82rem; margin: 2px 0 0 0; }
+}
+
+.arrow-list {
+  font-size: 18px;
+  color: #C5A87A !important;
+  opacity: 0.6;
+}

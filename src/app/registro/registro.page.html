@@ -1,0 +1,105 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <ion-title class="toolbar-title-blue">Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="register-container">
+
+    <div class="register-header-box">
+      <img src="assets/icon/Tec2.png" class="logo-register" alt="TecNM">
+      <h2>Crea tu Perfil</h2>
+      <p>Completa tus datos para iniciar el proceso de titulación</p>
+    </div>
+
+    <div class="form-stack">
+      
+      <div class="input-wrapper-gold" [class.field-invalid]="errores['nombre']">
+        <ion-icon name="person-outline" class="input-icon"></ion-icon>
+        <ion-input #nombreInput type="text" placeholder="Nombre(s)*" [(ngModel)]="nombre" class="custom-input"
+          [attr.aria-describedby]="errores['nombre'] ? 'nombre-error' : null" (ionInput)="limpiarError('nombre')"></ion-input>
+      </div>
+      <p *ngIf="errores['nombre']" id="nombre-error" class="field-error">{{ errores['nombre'] }}</p>
+
+      <div class="input-wrapper-gold" [class.field-invalid]="errores['primerApellido']">
+        <ion-icon name="person-add-outline" class="input-icon"></ion-icon>
+        <ion-input #apellidoInput type="text" placeholder="Primer Apellido*" [(ngModel)]="primerApellido" class="custom-input"
+          [attr.aria-describedby]="errores['primerApellido'] ? 'apellido-error' : null" (ionInput)="limpiarError('primerApellido')"></ion-input>
+      </div>
+      <p *ngIf="errores['primerApellido']" id="apellido-error" class="field-error">{{ errores['primerApellido'] }}</p>
+
+      <div class="input-wrapper-gold">
+        <ion-icon name="person-add-outline" class="input-icon"></ion-icon>
+        <ion-input type="text" placeholder="Segundo Apellido (opcional)" [(ngModel)]="segundoApellido" class="custom-input"></ion-input>
+      </div>
+
+      <div class="input-wrapper-gold">
+        <ion-icon name="document-text-outline" class="input-icon"></ion-icon>
+        <ion-input type="text" placeholder="Nombre del Proyecto" [(ngModel)]="proyecto" class="custom-input"></ion-input>
+      </div>
+
+      <div class="input-wrapper-gold" [class.field-invalid]="errores['matricula']">
+        <ion-icon name="id-card-outline" class="input-icon"></ion-icon>
+        <ion-input #matriculaInput type="text" placeholder="Matrícula / No. Control*" [(ngModel)]="matricula" class="custom-input"
+          [attr.aria-describedby]="errores['matricula'] ? 'matricula-error' : null" (ionInput)="limpiarError('matricula')"></ion-input>
+      </div>
+      <p *ngIf="errores['matricula']" id="matricula-error" class="field-error">{{ errores['matricula'] }}</p>
+
+      <ion-item lines="none" class="input-wrapper-gold career-input" [class.field-invalid]="errores['carrera']"
+        [attr.aria-describedby]="errores['carrera'] ? 'carrera-error' : null">
+        <ion-icon name="school-outline" class="input-icon" slot="start"></ion-icon>
+        <ion-select
+          #carreraInput
+          aria-label="Carrera"
+          placeholder="Selecciona tu carrera*"
+          [(ngModel)]="carrera"
+          (ionChange)="limpiarError('carrera')"
+          interface="popover"
+          [interfaceOptions]="{ cssClass: 'select-app select-carrera' }">
+          <ion-select-option *ngFor="let opcion of carreras" [value]="opcion">{{ opcion }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <p *ngIf="errores['carrera']" id="carrera-error" class="field-error">{{ errores['carrera'] }}</p>
+
+      <app-input-correo
+        placeholder="Correo Institucional*"
+        [(ngModel)]="correo"
+        [invalid]="!!errores['correo']"
+        [describedBy]="errores['correo'] ? 'correo-error' : null"
+        (ngModelChange)="limpiarError('correo')">
+      </app-input-correo>
+      <p *ngIf="errores['correo']" id="correo-error" class="field-error">{{ errores['correo'] }}</p>
+
+      <div class="input-wrapper-gold" [class.field-invalid]="errores['password']">
+        <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+        <app-input-password
+          placeholder="Contraseña*"
+          autocomplete="new-password"
+          [(ngModel)]="password"
+          class="custom-input"
+          [describedBy]="errores['password'] ? 'password-error' : null"
+          (ngModelChange)="limpiarError('password')">
+        </app-input-password>
+      </div>
+      <p *ngIf="errores['password']" id="password-error" class="field-error">{{ errores['password'] }}</p>
+
+      <ion-button expand="block" class="btn-register-submit" [disabled]="registrando" (click)="registrar()">
+        Registrarse
+      </ion-button>
+
+    </div>
+
+    <div class="register-footer">
+      <p>¿Ya tienes una cuenta? <a href="#" onclick="return false;" (click)="irALogin()">Inicia sesión</a></p>
+    </div>
+
+    <div class="back-roles-footer">
+      <ion-button fill="clear" class="btn-back-link" (click)="irARoles()">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

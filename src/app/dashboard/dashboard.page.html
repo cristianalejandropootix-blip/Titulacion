@@ -1,0 +1,60 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <ion-title class="toolbar-title-blue">Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+
+    <div class="login-header-box">
+      <img src="assets/icon/Tec2.png" class="logo-login" alt="TecNM Conkal">
+      <h2>Portal de Titulación</h2>
+      <p>Ingresa tus credenciales para acceder al sistema</p>
+    </div>
+
+    <div class="form-stack">
+      
+      <app-input-correo
+        [(ngModel)]="correo"
+        [invalid]="!!errores['correo']"
+        [describedBy]="errores['correo'] ? 'correo-error' : null"
+        (ngModelChange)="limpiarError('correo')">
+      </app-input-correo>
+      <p *ngIf="errores['correo']" id="correo-error" class="field-error">{{ errores['correo'] }}</p>
+
+      <div class="input-wrapper-gold" [class.field-invalid]="errores['contrasena']">
+        <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+        <app-input-password
+          autocomplete="current-password"
+          [(ngModel)]="contrasena"
+          class="custom-input"
+          [describedBy]="errores['contrasena'] ? 'contrasena-error' : null"
+          (ngModelChange)="limpiarError('contrasena')">
+        </app-input-password>
+      </div>
+      <p *ngIf="errores['contrasena']" id="contrasena-error" class="field-error">{{ errores['contrasena'] }}</p>
+
+      <ion-button expand="block" class="btn-login-submit" [disabled]="iniciandoSesion" (click)="ingresarAlMenu()">
+        Ingresar al Portal
+      </ion-button>
+
+      <div class="forgot-password-align">
+        <a href="#" onclick="return false;" (click)="recuperarContrasena()">¿Olvidaste tu contraseña?</a>
+      </div>
+
+    </div>
+
+    <div class="register-footer">
+      <p>¿No tienes una cuenta? <a href="#" onclick="return false;" (click)="crearUsuario()">Regístrate aquí</a></p>
+    </div>
+
+    <div class="back-roles-footer">
+      <ion-button fill="clear" class="btn-back-link" (click)="volverARoles()">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <div class="header-admin-box">
+      <img src="assets/icon/Tec2.png" class="logo-admin-top" alt="TecNM">
+      <ion-button fill="clear" class="btn-logout" (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="main-panel-container">
+
+    <div
+      *ngIf="mostrarAvisoCancelacion"
+      class="cancellation-notice"
+      role="status"
+      aria-live="polite">
+      <p>Coordinación canceló tu solicitud de titulación. Tus etapas fueron reiniciadas y debes volver a subir tus documentos desde la etapa 1.</p>
+      <ion-button fill="outline" (click)="entenderAvisoCancelacion()">Entendido</ion-button>
+    </div>
+
+    <div class="welcome-banner">
+      <h2>Menú de Egresado</h2>
+      <p>Gestión y Seguimiento de tu Proceso de Titulación</p>
+    </div>
+
+    <div class="cards-stack">
+
+      <ion-card class="student-list-item" (click)="navegargeneral('datos')">
+        <div class="student-avatar">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Datos Generales</h3>
+          <p>datos personales.</p>
+        </div>
+        <ion-icon name="arrow-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegargeneral('fases')">
+        <div class="student-avatar">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Etapas de Titulación</h3>
+          <p>Sigue el progreso de tus 5 fases oficiales.</p>
+        </div>
+        <ion-icon name="arrow-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegargeneral('profesores')">
+        <div class="student-avatar">
+          <ion-icon name="people-circle-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Directorio Docente</h3>
+          <p>Ver información de los maestros de la academia.</p>
+        </div>
+        <ion-icon name="arrow-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item" (click)="navegargeneral('asesor-proyecto')">
+        <div class="student-avatar">
+          <ion-icon name="document-attach-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Mi Asesor Asignado</h3>
+          <p>Sube avances y proyectos a tu asesor de trabajo final.</p>
+        </div>
+        <ion-icon name="arrow-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+      <ion-card class="student-list-item btn-settings-card" (click)="navegargeneral('ajustes')">
+        <div class="student-avatar"> <ion-icon name="settings-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>Configuración</h3>
+          <p>Ajustes de la cuenta y preferencias de la app.</p>
+        </div>
+        <ion-icon name="arrow-forward-outline" class="arrow-list"></ion-icon>
+      </ion-card>
+
+    </div> 
+  </div>
+</ion-content>

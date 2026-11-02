@@ -1,0 +1,68 @@
+· HTML
+<ion-content class="ion-padding">
+  <div class="premium-container">
+ 
+    <div class="header-premium">
+      <img src="assets/icon/Tec2.png" class="logo-top" alt="TecNM">
+    </div>
+ 
+    <div class="navigation-bar">
+      <ion-button fill="clear" (click)="regresar()" class="btn-back-gold">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h1 class="page-title">Directorio</h1>
+    </div>
+ 
+    <!-- COORDINADOR -->
+    <p class="section-indicator">Coordinador</p>
+ 
+    <div class="no-profesor" *ngIf="!coordinador">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <p>No se encontró información del coordinador.</p>
+    </div>
+ 
+    <div class="profesor-card" *ngIf="coordinador">
+      <div class="avatar-container">
+        <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+      </div>
+      <div class="profesor-info">
+        <span class="role-tag">Coordinador de Titulación</span>
+        <h2>{{ coordinador.nombre }} {{ coordinador.primer_apellido }} {{ coordinador.segundo_apellido }}</h2>
+        <p class="profesor-email">{{ coordinador.correo }}</p>
+      </div>
+      <div class="contact-actions">
+        <ion-button expand="block" class="btn-contact-email" (click)="contactarCorreo(coordinador.correo)">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          Contactar por Correo
+        </ion-button>
+      </div>
+    </div>
+ 
+    <!-- ASESOR -->
+    <p class="section-indicator">Mi Asesor</p>
+ 
+    <div class="no-profesor" *ngIf="!asesor">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <p>Aún no tienes un asesor asignado por el departamento.</p>
+    </div>
+ 
+    <div class="profesor-card" *ngIf="asesor">
+      <div class="avatar-container">
+        <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+      </div>
+      <div class="profesor-info">
+        <span class="role-tag">Asesor de Proyecto</span>
+        <h2>{{ asesor.nombre }} {{ asesor.primer_apellido }} {{ asesor.segundo_apellido }}</h2>
+        <p class="profesor-email">{{ asesor.correo }}</p>
+      </div>
+      <div class="contact-actions">
+        <ion-button expand="block" class="btn-contact-email" (click)="contactarCorreo(asesor.correo)">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          Contactar por Correo
+        </ion-button>
+      </div>
+    </div>
+ 
+  </div>
+</ion-content>
+ 

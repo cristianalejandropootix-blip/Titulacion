@@ -1,0 +1,123 @@
+/* --- BLINDAJE CONTRA MODO OSCURO --- */
+ion-header, ion-toolbar, ion-content {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.btn-back-gold { color: #C5A87A !important; font-size: 24px; }
+.toolbar-title-gold { color: #1B396A !important; font-weight: 700; font-size: 1.1rem; }
+
+.asesor-container {
+  max-width: 360px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.upload-limit {
+  color: #475569;
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 8px 0 0;
+}
+
+.empty-state-message {
+  margin: 10px 0;
+}
+
+.welcome-banner {
+  margin-bottom: 25px;
+  h2 { color: #1B396A !important; font-size: 1.5rem; font-weight: 700; margin: 0; }
+  p { color: #64748b !important; font-size: 0.88rem; margin: 4px 0 0 0; strong { color: #1B396A; } }
+}
+
+.section-indicator {
+  color: #1B396A !important; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin: 25px 0 12px 2px;
+}
+
+/* --- TARJETA DE CARGA DE ARCHIVOS --- */
+.upload-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(197, 168, 122, 0.4) !important; /* 1px Dorado */
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+}
+
+.file-status-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding: 5px 0;
+
+  .file-icon-active { font-size: 38px; color: #1B396A !important; }
+  .file-icon-empty { font-size: 38px; color: #94a3b8 !important; }
+  
+  .file-info {
+    h5 { color: #1B396A !important; font-size: 0.95rem; font-weight: 600; margin: 0; word-break: break-all; }
+    p { color: #64748b !important; font-size: 0.8rem; margin: 2px 0 0 0; span { color: #C5A87A !important; font-weight: 600; } }
+  }
+}
+
+.empty-state {
+  border: 1px dashed rgba(100, 116, 139, 0.25);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.btn-select-file {
+  --background: #1B396A !important; /* Azul Marino */
+  --color: #ffffff !important;
+  --border-radius: 12px;
+  height: 46px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* --- 🌟 CAJA DE COMENTARIOS / RETROALIMENTACIÓN --- */
+.feedback-received-box {
+  background: rgba(197, 168, 122, 0.04) !important; /* Fondo suave dorado */
+  border: 1px solid rgba(197, 168, 122, 0.5) !important; /* Recuadro dorado institucional */
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(197, 168, 122, 0.03) !important;
+
+  .feedback-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    
+    .chat-icon { color: #C5A87A !important; font-size: 20px; }
+    h4 { color: #C5A87A !important; font-size: 0.8rem; font-weight: 700; margin: 0; letter-spacing: 0.5px; }
+  }
+
+  .feedback-text {
+    color: #334155 !important;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic; /* Resalta que es una cita textual del maestro */
+  }
+
+  .feedback-footer-date {
+    text-align: right;
+    margin-top: 10px;
+    span { color: #94a3b8 !important; font-size: 0.75rem; }
+  }
+}
+
+/* Caja de espera cuando no hay notas */
+.feedback-pending-box {
+  background: #f8fafc !important;
+  border: 1px solid rgba(100, 116, 139, 0.15) !important;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .time-icon { color: #94a3b8 !important; font-size: 24px; flex-shrink: 0; }
+  p { color: #64748b !important; font-size: 0.85rem; margin: 0; line-height: 1.4; }
+}

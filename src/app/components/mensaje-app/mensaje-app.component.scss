@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  font-family: var(--ion-font-family, inherit);
+}
+
+.mensaje-card {
+  --mensaje-color: var(--ion-color-primary);
+  box-sizing: border-box;
+  width: min(100%, 380px);
+  padding: 28px 24px 22px;
+  border: 1px solid color-mix(in srgb, var(--mensaje-color) 25%, var(--mensaje-card-background));
+  border-radius: 16px;
+  background: var(--mensaje-card-background);
+  color: var(--mensaje-title-color);
+  box-shadow: 0 12px 36px var(--mensaje-shadow-color);
+  text-align: center;
+  animation: mensaje-entrada 180ms ease-out;
+}
+
+.mensaje--error { --mensaje-color: var(--mensaje-error-color); }
+.mensaje--exito { --mensaje-color: var(--mensaje-exito-color); }
+.mensaje--advertencia { --mensaje-color: var(--mensaje-advertencia-color); }
+.mensaje--info,
+.mensaje--confirmacion { --mensaje-color: var(--ion-color-primary); }
+
+.mensaje-icono {
+  color: var(--mensaje-color);
+  font-size: 42px;
+}
+
+h2 {
+  margin: 12px 0 8px;
+  color: var(--mensaje-title-color);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  color: var(--mensaje-text-color);
+  font-size: 1rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mensaje-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.btn-aceptar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast, #ffffff);
+  --border-radius: 12px;
+  min-width: 112px;
+  font-weight: 600;
+}
+
+.btn-cancelar {
+  --color: var(--ion-color-primary);
+  --border-color: var(--ion-color-primary);
+  --border-radius: 12px;
+  min-width: 112px;
+  font-weight: 600;
+}
+
+:host-context(.alto-contraste) .mensaje-card {
+  border: 2px solid #ffff00;
+  box-shadow: 0 0 0 2px #000000;
+}
+
+:host-context(.alto-contraste) .mensaje-icono {
+  color: var(--mensaje-contraste-color);
+}
+
+@keyframes mensaje-entrada {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mensaje-card { animation: none; }
+}

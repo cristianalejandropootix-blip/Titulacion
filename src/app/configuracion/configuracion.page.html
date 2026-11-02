@@ -1,0 +1,41 @@
+<ion-content class="ion-padding">
+  <div class="premium-container">
+
+    <div class="header-premium">
+      <img src="assets/icon/Tec2.png" class="logo-top" alt="TecNM">
+    </div>
+
+    <div class="navigation-bar">
+      <ion-button fill="clear" (click)="regresar()" class="btn-back-gold">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h1 class="page-title">Configuración</h1>
+    </div>
+
+    <div class="user-info-box" *ngIf="usuario">
+      <p class="user-name">{{ usuario.nombre }} {{ usuario.primerApellido }}</p>
+      <p class="user-email">{{ usuario.correo }}</p>
+    </div>
+
+    <div class="config-stack">
+
+      <p class="section-label">Accesibilidad Visual</p>
+
+      <div class="config-item-card">
+        <div class="item-left">
+          <ion-icon name="text-outline" class="icon-gold"></ion-icon>
+          <div class="text-group">
+            <h2>Texto Grande</h2>
+            <p>Incrementa el tamaño de la fuente de la app</p>
+          </div>
+        </div>
+        <ion-toggle color="warning" [checked]="textoGrande" (ionChange)="toggleTextoGrande($event)"></ion-toggle>
+      </div>
+
+      <div class="info-app-footer">
+        <p>Versión 1.0.0 — TecNM Conkal</p>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

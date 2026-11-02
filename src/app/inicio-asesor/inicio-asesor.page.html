@@ -1,0 +1,109 @@
+<ion-header lines="none">
+  <ion-toolbar>
+    <div class="header-admin-box">
+      <img src="assets/icon/Tec2.png" class="logo-admin-top" alt="TecNM">
+      <ion-button fill="clear" class="btn-logout" (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="main-panel-container">
+
+    <div class="welcome-banner">
+      <h2>Panel de Asesoría</h2>
+      <p *ngIf="asesor">Asesor: <strong>{{ asesor.nombre }} {{ asesor.primerApellido }}</strong></p>
+    </div>
+
+    <p class="section-indicator">Mis Egresados Asignados ({{ misAlumnos.length }})</p>
+
+    <p *ngIf="errorCargaAlumnos" class="empty-state-message">No se pudieron cargar tus egresados asignados.</p>
+    <div *ngIf="misAlumnos.length === 0" style="text-align:center; color:#888; padding:20px;">
+      No tienes egresados asignados aún. El coordinador debe asignarte egresados.
+    </div>
+
+    <div class="student-list-container">
+      <div *ngFor="let alumno of misAlumnos" class="student-list-item" (click)="revisarProyectoAlumno(alumno)">
+        <div class="student-avatar">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div class="student-brief">
+          <h3>{{ alumno.nombre }} {{ alumno.primer_apellido }}</h3>
+          <p>{{ alumno.matricula_o_nomina }}</p>
+          <span class="badge-proyecto">{{ alumno.nombre_proyecto || 'Sin proyecto' }}</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow-list"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL SIMPLIFICADO — Solo proyecto y retroalimentación -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" class="premium-admin-modal">
+    <ng-template>
+      <ion-header lines="none">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title>Retroalimentación</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModal()" class="btn-close-modal">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding modal-bg">
+        <div *ngIf="alumnoSeleccionado" class="modal-body">
+
+          <div class="modal-student-header">
+            <h2>{{ alumnoSeleccionado.nombre }} {{ alumnoSeleccionado.primer_apellido }}</h2>
+            <p>Matrícula: <strong>{{ alumnoSeleccionado.matricula_o_nomina }}</strong></p>
+            <p>Proyecto: <strong class="text-blue">{{ alumnoSeleccionado.nombre_proyecto || 'Sin proyecto' }}</strong></p>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Solo documentos del proyecto (paso2) -->
+          <p class="modal-section-title">Documento del Proyecto:</p>
+          <p *ngIf="errorCargaDocumentos" class="empty-state-message">No se pudieron cargar los documentos del egresado.</p>
+          <div *ngIf="documentosAlumno.length === 0" style="color:#888; font-size:14px; padding: 8px 0;">
+            El egresado aún no ha subido su proyecto.
+          </div>
+          <div class="modal-docs-list">
+            <div *ngFor="let doc of documentosAlumno" class="pdf-box">
+              <ion-icon name="document-attach-outline" class="pdf-icon"></ion-icon>
+              <div class="pdf-info">
+                <p class="doc-title-main">{{ doc.nombre_doc }}</p>
+                <p class="file-name-sub">{{ doc.nombre_archivo }}</p>
+                <ion-button fill="clear" size="small" (click)="verDocumento(doc.ruta_archivo)">
+                  <ion-icon slot="start" name="eye-outline"></ion-icon>
+                  Ver PDF
+                </ion-button>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Retroalimentación -->
+          <p class="modal-section-title">Retroalimentación del Asesor:</p>
+          <div class="comment-wrapper">
+            <ion-textarea 
+              placeholder="Escribe aquí tus observaciones, correcciones o notas sobre el proyecto del egresado..." 
+              rows="6" 
+              [(ngModel)]="comentarioAsesor"
+              class="custom-textarea">
+            </ion-textarea>
+          </div>
+
+          <ion-button expand="block" class="btn-save-comment" [disabled]="guardandoRetroalimentacion" (click)="guardarComentariosAsesor()">
+            <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+            Guardar Retroalimentación
+          </ion-button>
+
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
