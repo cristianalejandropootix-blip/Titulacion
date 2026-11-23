@@ -12,9 +12,9 @@ conforme avance el trabajo.
 
 | Foto | Integrante | Correo |
 |:---:|---|---|
-| <img src="fotos/misael-can-balam.jpg.png" width="120"> | **Misael Can Balam** | L23800326@conkal.tecnm.mx |
-| <img src="fotos/adriana-cen-gonzalez.jpg.png" width="120"> | **Adriana Cen González** | L23800036@conkal.tecnm.mx |
-| <img src="fotos/cristian-poot-ix.jpg" width="120"> | **Cristian Poot Ix** | L23800035@conkal.tecnm.mx |
+| <img src="misael-can-balam.jpg.png" width="120"> | **Misael Can Balam** | L23800326@conkal.tecnm.mx |
+| <img src="adriana-cen-gonzalez.jpg.png" width="120"> | **Adriana Cen González** | L23800036@conkal.tecnm.mx |
+| <img src="cristian-poot-ix.jpg.png" width="120"> | **Cristian Poot Ix** | L23800035@conkal.tecnm.mx |
 
 ## Organización del repositorio (ramas)
 
