@@ -21,16 +21,16 @@ conforme avance el trabajo.
 | Rama | Contenido |
 |---|---|
 | [`main`](../../tree/main) | Portada, equipo y fotos |
-| [`documentacion`](../../tree/documentacion) | Definición de usuarios, Especificación de requerimientos de software, Artículo |
+| [`documentacion`](../../tree/documentacion/documentacion) | Definición de usuarios, Especificación de requerimientos de software, Artículo |
 | [`codigos-fuente`](../../tree/codigos-fuente) | Código de la app móvil, API y base de datos |
 | [`pruebas`](../../tree/pruebas) | Formatos, videos y audios |
 | [`presentaciones`](../../tree/presentaciones) | Divulgación e Investigadores |
 
 ## Documentación
 
-Disponible en la rama [`documentacion`](../../tree/documentacion):
+Disponible en la rama [`documentacion`](../../tree/documentacion/documentacion):
 
-- **Definición de usuarios:** perfiles Egresado, Revisor, Asesor y Administrador.
+- **Definición de usuarios:** perfiles Egresado, Asesor, Coordinador, Academia y Servicios escolares.
 - **Especificación de requerimientos de software:** requisitos funcionales y no funcionales (borrador v0.1).
 - **Artículo:** metodología y practicidad de la aplicación, elaborado con la plantilla del congreso CITCA 2025.
 
