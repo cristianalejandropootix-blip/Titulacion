@@ -22,7 +22,7 @@ conforme avance el trabajo.
 |---|---|
 | Portada, equipo y código de la app móvil | [`main`](../../tree/main) |
 | Documentación: Definición de usuarios, Especificación de requerimientos de software y Artículo | [`documentacion/`](../../tree/main/documentacion) |
-| Pruebas | Rama `pruebas` |
+| Pruebas| [`Pruebas.zip`](../../blob/main/Pruebas.zip) |
 
 
 ## Documentación
